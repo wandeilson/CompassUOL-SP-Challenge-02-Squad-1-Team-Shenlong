@@ -23,6 +23,9 @@ public class Customer {
 
     private boolean active;
 
+    public Customer() {
+
+    }
     public Customer(Long id, String name, String cpf, String email, boolean active) {
         this.id = id;
         this.name = name;
