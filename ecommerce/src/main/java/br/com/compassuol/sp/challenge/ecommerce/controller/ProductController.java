@@ -18,7 +18,6 @@ public class ProductController {
         this.productService = productService;
     }
 
-
     @PostMapping
     public ResponseEntity<Object> create (@RequestBody @Valid Product product){
         return ResponseEntity.status(HttpStatus.CREATED).body(productService.create(product));
@@ -35,7 +34,7 @@ public class ProductController {
         Product obj = productService.findById(id);
         return ResponseEntity.ok().body(obj);
     }
-    @PutMapping(value = "{id}")
+    @PutMapping(value = "/{id}")
     public ResponseEntity<Product> update(@PathVariable Long id, @RequestBody Product obj){
         obj = productService.update(id, obj);
         return ResponseEntity.ok().body(obj);
@@ -44,6 +43,6 @@ public class ProductController {
     @DeleteMapping(value = "/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id){
         productService.delete(id);
-        return ResponseEntity.noContent().build();
+        return ResponseEntity.ok().build();
     }
 }
