@@ -21,9 +21,9 @@ public class Order {
     private long orderId;
 
 
-    @NotNull
-    @OneToOne
-    @JoinColumn(name = "customer_id")
+    //@NotNull
+    //@OneToOne
+    //@JoinColumn(name = "customer_id")
    // private Customer customerId;
 
 
@@ -31,7 +31,7 @@ public class Order {
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'hh:mm:ss'Z'",timezone = "GMT")
     @Column(name = "data_hora", nullable = false)
     @DateTimeFormat
-    private LocalDate dataHora;
+    private LocalDate dateHour;
 
     @NotNull
     @Enumerated(EnumType.STRING)
@@ -54,12 +54,12 @@ public class Order {
         this.customerId = customerId;
     }
 */
-    public LocalDate getDataHora() {
-        return dataHora;
+    public LocalDate getDateHour() {
+        return dateHour;
     }
 
-    public void setDataHora(LocalDate dataHora) {
-        this.dataHora = dataHora;
+    public void setDataHora(LocalDate dateHour) {
+        this.dateHour = dateHour;
     }
 
     public OrderStatus getOrderStatus() {
