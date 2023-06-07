@@ -1,9 +1,14 @@
 package br.com.compassuol.sp.challenge.ecommerce.model;
 
 import br.com.compassuol.sp.challenge.ecommerce.model.enums.OrderStatus;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
+import org.springframework.format.annotation.DateTimeFormat;
 
+
+import java.time.Instant;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Objects;
@@ -12,7 +17,7 @@ import java.util.Objects;
 @Table(name = "orders")
 public class Order {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private long orderId;
 
 
@@ -23,10 +28,14 @@ public class Order {
 
 
     @NotNull
-    private LocalDateTime dataHora;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'hh:mm:ss'Z'",timezone = "GMT")
+    @Column(name = "data_hora", nullable = false)
+    @DateTimeFormat
+    private LocalDate dataHora;
 
     @NotNull
     @Enumerated(EnumType.STRING)
+    @Column(name = "order_status")
     private OrderStatus orderStatus;
 
     public long getOrderId() {
@@ -45,11 +54,11 @@ public class Order {
         this.customerId = customerId;
     }
 */
-    public LocalDateTime getDataHora() {
+    public LocalDate getDataHora() {
         return dataHora;
     }
 
-    public void setDataHora(LocalDateTime dataHora) {
+    public void setDataHora(LocalDate dataHora) {
         this.dataHora = dataHora;
     }
 
