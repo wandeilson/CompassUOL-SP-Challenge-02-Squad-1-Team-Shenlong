@@ -15,20 +15,19 @@ public class CustomerService {
         this.customerRepository = customerRepository;
     }
 
-    public Customer findCustomer(Long id) {
+    public Customer findById(Long id) {
         Optional<Customer> customer = customerRepository.findById(id);
-
         return customer.orElse(null);
     }
 
-    public Customer createCustomer(Customer customer) {
+    public Customer create(Customer customer) {
         if (customer.getCpf().length() != 11 || customer.getCpf() == null) {
             throw new RuntimeException("Invalid CPF");
         }
         return customerRepository.save(customer);
     }
 
-    public Customer updateCustomer(Customer customer, Long id) {
+    public Customer update(Customer customer, Long id) {
         Optional<Customer> optionalCustomer = customerRepository.findById(id);
         if (optionalCustomer.isEmpty())
             throw new CustomerNotFoundException("Customer does not exist");
@@ -36,7 +35,4 @@ public class CustomerService {
         customer.setId(id);
         return customerRepository.save(customer);
     }
-
-
-
 }

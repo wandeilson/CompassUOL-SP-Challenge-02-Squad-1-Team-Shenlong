@@ -1,46 +1,41 @@
 package br.com.compassuol.sp.challenge.ecommerce.model;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Pattern;
-import jakarta.validation.constraints.Size;
+import jakarta.validation.constraints.*;
 import org.springframework.boot.autoconfigure.web.WebProperties;
 
 @Entity
 public class Customer {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long customerId;
 
+    @NotNull(message = "Name is mandatory")
     @Size(min = 3, message = "Name should be at least 3 characters long")
+    @NotBlank
     private String name;
 
+    @NotNull(message = "CPF is mandatory")
     @Size(min = 11, max = 11)
+    @NotBlank
     private String cpf;
 
+    @NotNull(message = "Email is mandatory")
     @Email
+    @NotBlank
     private String email;
 
     private boolean active;
 
     public Customer() {
-
-    }
-    public Customer(Long id, String name, String cpf, String email, boolean active) {
-        this.id = id;
-        this.name = name;
-        this.cpf = cpf;
-        this.email = email;
-        this.active = active;
     }
 
     public Long getId() {
-        return id;
+        return customerId;
     }
 
     public void setId(Long id) {
-        this.id = id;
+        this.customerId = id;
     }
 
     public String getName() {
@@ -78,7 +73,7 @@ public class Customer {
     @Override
     public String toString() {
         return "Customer{" +
-                "id=" + id +
+                "id=" + customerId +
                 ", name='" + name + '\'' +
                 ", cpf='" + cpf + '\'' +
                 ", email='" + email + '\'' +
