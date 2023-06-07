@@ -17,14 +17,14 @@ import java.util.Objects;
 @Table(name = "orders")
 public class Order {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private long orderId;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long orderId;
 
 
-    //@NotNull
-    //@OneToOne
-    //@JoinColumn(name = "customer_id")
-   // private Customer customerId;
+    @NotNull
+    @OneToOne
+    @JoinColumn(name = "customer_id")
+    private Customer customerId;
 
 
     @NotNull
@@ -46,14 +46,15 @@ public class Order {
         this.orderId = orderId;
     }
 
-   /* public customer getCustomerId() {
+
+    public Customer getCustomerId() {
         return customerId;
     }
 
-    public void setCustomerId(customer customerId) {
+    public void setCustomerId(Customer customerId) {
         this.customerId = customerId;
     }
-*/
+
     public LocalDate getDateHour() {
         return dateHour;
     }

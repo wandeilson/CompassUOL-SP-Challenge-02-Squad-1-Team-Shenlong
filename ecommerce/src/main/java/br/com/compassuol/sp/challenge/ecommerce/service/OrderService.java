@@ -25,7 +25,7 @@ public class OrderService {
     @Transactional
     public Order createOrder(Order or){
         Order order = new Order();
-      //  order.setCustomerId(order.getCustomerId());
+       order.setCustomerId(order.getCustomerId());
         order.setDataHora(LocalDate.now());
         order.setOrderStatus(order.getOrderStatus());
         return orderRepository.save(order);
