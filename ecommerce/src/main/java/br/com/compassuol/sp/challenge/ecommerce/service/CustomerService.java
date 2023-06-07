@@ -1,10 +1,10 @@
 package br.com.compassuol.sp.challenge.ecommerce.service;
 
+import br.com.compassuol.sp.challenge.ecommerce.exception.CustomerNotFoundException;
 import br.com.compassuol.sp.challenge.ecommerce.model.Customer;
 import br.com.compassuol.sp.challenge.ecommerce.repository.CustomerRepository;
 import org.springframework.stereotype.Service;
 
-import java.util.NoSuchElementException;
 import java.util.Optional;
 
 @Service
@@ -17,14 +17,13 @@ public class CustomerService {
 
     public Customer findCustomer(Long id) {
         Optional<Customer> customer = customerRepository.findById(id);
-        if (customer.isEmpty())
-            throw new RuntimeException(); //placeholder
-        return customer.get();
+
+        return customer.orElse(null);
     }
 
     public Customer createCustomer(Customer customer) {
         if (customer.getCpf().length() != 11 || customer.getCpf() == null) {
-            throw new RuntimeException("Invalid CPF"); //placeholder
+            throw new RuntimeException("Invalid CPF");
         }
         return customerRepository.save(customer);
     }
@@ -32,7 +31,7 @@ public class CustomerService {
     public Customer updateCustomer(Customer customer, Long id) {
         Optional<Customer> optionalCustomer = customerRepository.findById(id);
         if (optionalCustomer.isEmpty())
-            throw new RuntimeException(); //placeholder
+            throw new CustomerNotFoundException("Customer does not exist");
 
         customer.setId(id);
         return customerRepository.save(customer);

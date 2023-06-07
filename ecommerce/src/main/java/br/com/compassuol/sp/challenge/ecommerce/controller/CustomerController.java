@@ -1,13 +1,12 @@
 package br.com.compassuol.sp.challenge.ecommerce.controller;
 
+import br.com.compassuol.sp.challenge.ecommerce.exception.CustomerNotFoundException;
 import br.com.compassuol.sp.challenge.ecommerce.model.Customer;
 import br.com.compassuol.sp.challenge.ecommerce.service.CustomerService;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/v1/customers")
@@ -20,7 +19,13 @@ public class CustomerController {
 
     @GetMapping("/{customerId}")
     public Customer getCustomer(@PathVariable Long customerId) {
-        return customerService.findCustomer(customerId);
+        Customer customer = customerService.findCustomer(customerId);
+
+        if (customer == null) {
+            throw new CustomerNotFoundException("Id: " + customerId + " does not exist");
+        }
+
+        return customer;
     }
 
     @PostMapping
