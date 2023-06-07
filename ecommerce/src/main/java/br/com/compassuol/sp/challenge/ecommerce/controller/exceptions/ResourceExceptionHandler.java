@@ -1,7 +1,7 @@
 package br.com.compassuol.sp.challenge.ecommerce.controller.exceptions;
 
-import br.com.compassuol.sp.challenge.ecommerce.exceptions.DatabaseException;
-import br.com.compassuol.sp.challenge.ecommerce.exceptions.ResourceNotFoundException;
+import br.com.compassuol.sp.challenge.ecommerce.exception.DatabaseException;
+import br.com.compassuol.sp.challenge.ecommerce.exception.ResourceNotFoundException;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
