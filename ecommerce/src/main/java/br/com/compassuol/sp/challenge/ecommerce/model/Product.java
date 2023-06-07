@@ -19,6 +19,7 @@ public class Product {
     @NotBlank(message = "Description is mandatory")
     private String description;
 
+
     public Long getProductId() {
         return productId;
     }
