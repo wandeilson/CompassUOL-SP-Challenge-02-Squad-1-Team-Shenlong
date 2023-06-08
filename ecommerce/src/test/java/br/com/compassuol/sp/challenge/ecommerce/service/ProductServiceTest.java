@@ -8,7 +8,7 @@ public class ProductService {
 
     private ProductService productService;
     @BeforeEach
-    void setUo(){
+    void setUp(){
         productService = new ProductService();
     }
 
