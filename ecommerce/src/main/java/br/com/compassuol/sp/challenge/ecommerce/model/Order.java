@@ -11,6 +11,8 @@ import org.springframework.format.annotation.DateTimeFormat;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -20,23 +22,24 @@ public class Order {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long orderId;
 
-
-    @NotNull
     @OneToOne
     @JoinColumn(name = "customer_id")
     private Customer customerId;
 
+    private ProductOrder productOrder;
 
-    @NotNull
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'hh:mm:ss'Z'",timezone = "GMT")
+
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd",timezone = "GMT")
     @Column(name = "data_hora", nullable = false)
     @DateTimeFormat
     private LocalDate dateHour;
 
-    @NotNull
     @Enumerated(EnumType.STRING)
     @Column(name = "order_status")
     private OrderStatus orderStatus;
+
+    public Order() {
+    }
 
     public long getOrderId() {
         return orderId;
