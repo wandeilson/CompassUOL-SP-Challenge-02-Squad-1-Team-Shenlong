@@ -4,6 +4,7 @@ import br.com.compassuol.sp.challenge.ecommerce.model.Order;
 import br.com.compassuol.sp.challenge.ecommerce.service.OrderService;
 import jakarta.validation.constraints.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -17,6 +18,7 @@ public class OrderController {
     @Autowired
     private OrderService orderService;
 
+
     @GetMapping
     public List<Order> getOrders(){
         return orderService.getOrders();
@@ -24,19 +26,19 @@ public class OrderController {
     }
 
     @PostMapping
-    public ResponseEntity<Order> createOrder(@RequestBody Order or, UriComponentsBuilder builder){
+    public ResponseEntity<String> createOrder(@RequestBody Order or){
         Order order = orderService.createOrder(or);
 
-        URI endereco = builder.path("/v1/orders/{id}").buildAndExpand(order.getOrderId()).toUri();
+       orderService.createOrder(order);
 
-        return ResponseEntity.created(endereco).body(order);
-    }
+        return new ResponseEntity<>("Pedido criado com sucesso", HttpStatus.CREATED);
+    };
 
     @GetMapping("customers/{customerId}")
     public Order getOrderByCustomerId(@PathVariable @NotNull Long customerId){
         return orderService.getOrderByCustomerId(customerId);
-    }
+    };
 
 
 
-}
+};
