@@ -4,58 +4,62 @@ import br.com.compassuol.sp.challenge.ecommerce.model.enums.OrderStatus;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotNull;
 import org.springframework.format.annotation.DateTimeFormat;
 
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 
 @Entity
 @Table(name = "orders")
-public class Order{
+public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long orderId;
 
-
-    @NotNull
     @OneToOne
     @JoinColumn(name = "customer_id")
     private Customer customerId;
 
+    private ProductOrder productOrder;
 
-    @NotNull
+
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd",timezone = "GMT")
     @Column(name = "data_hora", nullable = false)
     @DateTimeFormat
-    private LocalDateTime dateHour;
+    private LocalDate dateHour;
 
-    @NotNull
     @Enumerated(EnumType.STRING)
     @Column(name = "order_status")
     private OrderStatus orderStatus;
 
-   @OneToMany
-   private List<Product> listProduct = new ArrayList<>();
+
+    private List<ProductOrder> productOrderList;
 
 
-    public Order(){
-
+    public Order() {
+        productOrderList = new ArrayList<>();
     }
 
-    public Order(Long orderId, Customer customerId, LocalDateTime dateHour, OrderStatus orderStatus) {
+    public Order(Long orderId, Customer customerId, OrderStatus orderStatus) {
         this.orderId = orderId;
         this.customerId = customerId;
-        this.dateHour = dateHour;
+        this.dateHour = LocalDate.now();
         this.orderStatus = orderStatus;
-        listProduct = new ArrayList<>();
+        productOrderList = new ArrayList<>();
     }
 
-    public void addProduct(Product product){
-        this.listProduct.add(product);
+    public List<ProductOrder> getProductOrderList(){
+        return productOrderList;
+    }
+
+
+    public void addProduct(Product product , int quantity){
+        ProductOrder productOrder = new ProductOrder(product, quantity);
+        this.productOrderList.add(productOrder);
     }
 
     public long getOrderId() {
@@ -75,11 +79,11 @@ public class Order{
         this.customerId = customerId;
     }
 
-    public LocalDateTime getDateHour() {
+    public LocalDate getDateHour() {
         return dateHour;
     }
 
-    public void setDataHora(LocalDateTime dateHour) {
+    public void setDataHora(LocalDate dateHour) {
         this.dateHour = dateHour;
     }
 
@@ -89,14 +93,6 @@ public class Order{
 
     public void setOrderStatus(OrderStatus orderStatus) {
         this.orderStatus = orderStatus;
-    }
-
-    public List<Product> getListProduct() {
-        return listProduct;
-    }
-
-    public void setListProduct(List<Product> listProduct) {
-        this.listProduct = listProduct;
     }
 
     @Override

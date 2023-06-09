@@ -8,6 +8,7 @@ import org.springframework.boot.autoconfigure.web.WebProperties;
 public class Customer {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "customer_id")
     private Long customerId;
 
     @NotNull(message = "Name is mandatory")
