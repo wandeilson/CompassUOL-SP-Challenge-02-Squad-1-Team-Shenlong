@@ -1,4 +1,4 @@
-package br.com.compassuol.sp.challenge.ecommerce.exceptions;
+package br.com.compassuol.sp.challenge.ecommerce.exception;
 
 public class ResourceNotFoundException extends RuntimeException{
 
