@@ -3,21 +3,29 @@ package br.com.compassuol.sp.challenge.ecommerce.controller;
 import br.com.compassuol.sp.challenge.ecommerce.model.Product;
 import br.com.compassuol.sp.challenge.ecommerce.repository.ProductRepository;
 import br.com.compassuol.sp.challenge.ecommerce.service.ProductService;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.MvcResult;
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @ExtendWith(MockitoExtension.class)
 public class ProductControllerTest {
@@ -30,13 +38,10 @@ public class ProductControllerTest {
     @Mock
     ProductRepository productRepository;
 
-    MockMvc mockMvc;
-
     Product product1;
 
     Product product2;
 
-    Product product3;
     @BeforeEach
     void setUp(){
         //Scenario
@@ -80,6 +85,19 @@ public class ProductControllerTest {
       List<Product> listProduct = productRepository.findAll();
         //Verification
       assertEquals(productList, listProduct);
+    }
+    @Test
+    public void updateTest(){
+        product1.setDescription("update teste unitário");
+        assertNotNull(productController.update(1L, product1));
+        assertEquals("update teste unitário", product1.getDescription());
+    }
+    @Test
+    public void deleteTest() {
+        ResponseEntity<?> response = productController.delete(1L);
+        HttpStatus statusCode = (HttpStatus) response.getStatusCode();
+
+        assertEquals(HttpStatus.NO_CONTENT, statusCode);
     }
 
 }
