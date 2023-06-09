@@ -1,10 +1,10 @@
 package br.com.compassuol.sp.challenge.ecommerce.service;
 
+import br.com.compassuol.sp.challenge.ecommerce.exception.CustomerNotFoundException;
 import br.com.compassuol.sp.challenge.ecommerce.model.Customer;
 import br.com.compassuol.sp.challenge.ecommerce.model.Order;
 import br.com.compassuol.sp.challenge.ecommerce.model.Product;
 
-import br.com.compassuol.sp.challenge.ecommerce.model.ProductOrder;
 import br.com.compassuol.sp.challenge.ecommerce.repository.CustomerRepository;
 import br.com.compassuol.sp.challenge.ecommerce.repository.OrderRepository;
 import br.com.compassuol.sp.challenge.ecommerce.repository.ProductRepository;
@@ -25,13 +25,12 @@ import java.util.Optional;
 public class OrderService {
     private OrderRepository  orderRepository;
     private CustomerRepository customerRepository;
-    @Autowired
-    private ProductRepository productRepository;
+    //private ProductRepository productRepository;
 
     public OrderService(OrderRepository orderRepository, CustomerRepository customerRepository,ProductRepository productRepository){
         this.orderRepository = orderRepository;
         this.customerRepository = customerRepository;
-        this.productRepository = productRepository;
+        //this.productRepository = productRepository;
     }
 
     public List<Order> getOrders(){
@@ -40,24 +39,24 @@ public class OrderService {
     }
 
 
-    private List<Product> products = productRepository.findAll();
+    //private List<Product> products = productRepository.findAll();
 
     @Transactional
     public Order createOrder(Order or, Long customerId){
 
         Order order = new Order();
 
-        for( ProductOrder productOrder : order.getProductOrderList()){
-           Product product = products.stream().filter(x -> x.getProductId() == productOrder.getProduct().getProductId()).findFirst().orElse(null);
-            order.addProduct(product, productOrder.getQuantity());
-        }
+//        for( ProductOrder productOrder : order.getProductOrderList()){
+//           Product product = products.stream().filter(x -> x.getProductId() == productOrder.getProduct().getProductId()).findFirst().orElse(null);
+//            order.addProduct(product, productOrder.getQuantity());
+//        }
 
-        order.setCustomerId(order.getCustomerId());
+        order.setCustomerId(or.getCustomerId());
         order.setDataHora(LocalDate.now());
-        order.setOrderStatus(order.getOrderStatus());
+        order.setOrderStatus(or.getOrderStatus());
         Optional<Customer> customerOptional =  customerRepository.findById(customerId);
         if (customerOptional.isEmpty())
-            System.out.println("lança exception");
+            throw new CustomerNotFoundException("Customer not found");
         Customer customer = customerOptional.get();
         order.setCustomerId(customer);
         return orderRepository.save(order);

@@ -4,6 +4,7 @@ import br.com.compassuol.sp.challenge.ecommerce.model.enums.OrderStatus;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import org.springframework.format.annotation.DateTimeFormat;
 
 
@@ -20,28 +21,29 @@ public class Order {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long orderId;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "customer_id")
     private Customer customerId;
 
-    private ProductOrder productOrder;
+    //private ProductOrder productOrder;
 
 
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd",timezone = "GMT")
-    @Column(name = "data_hora", nullable = false)
+    @Column(nullable = false)
     @DateTimeFormat
     private LocalDate dateHour;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "order_status")
+    @NotNull(message = "Order status must be included")
     private OrderStatus orderStatus;
 
 
-    private List<ProductOrder> productOrderList;
+    //private List<ProductOrder> productOrderList;
 
 
     public Order() {
-        productOrderList = new ArrayList<>();
+        //productOrderList = new ArrayList<>();
     }
 
     public Order(Long orderId, Customer customerId, OrderStatus orderStatus) {
@@ -49,18 +51,18 @@ public class Order {
         this.customerId = customerId;
         this.dateHour = LocalDate.now();
         this.orderStatus = orderStatus;
-        productOrderList = new ArrayList<>();
+        //productOrderList = new ArrayList<>();
     }
 
-    public List<ProductOrder> getProductOrderList(){
-        return productOrderList;
-    }
-
-
-    public void addProduct(Product product , int quantity){
-        ProductOrder productOrder = new ProductOrder(product, quantity);
-        this.productOrderList.add(productOrder);
-    }
+//    public List<ProductOrder> getProductOrderList(){
+//        return productOrderList;
+//    }
+//
+//
+//    public void addProduct(Product product , int quantity){
+//        ProductOrder productOrder = new ProductOrder(product, quantity);
+//        this.productOrderList.add(productOrder);
+//    }
 
     public long getOrderId() {
         return orderId;

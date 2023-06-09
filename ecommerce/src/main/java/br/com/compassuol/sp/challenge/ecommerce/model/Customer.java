@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 import org.springframework.boot.autoconfigure.web.WebProperties;
 
+import java.util.List;
+
 @Entity
 public class Customer {
     @Id
@@ -19,6 +21,7 @@ public class Customer {
     @NotNull(message = "CPF is mandatory")
     @Size(min = 11, max = 11)
     @NotBlank
+    @Column(name = "cpf", unique = true)
     private String cpf;
 
     @NotNull(message = "Email is mandatory")
@@ -27,6 +30,9 @@ public class Customer {
     private String email;
 
     private boolean active;
+
+    @OneToMany(mappedBy = "customerId")
+    private List<Order> orders;
 
     public Customer() {
     }

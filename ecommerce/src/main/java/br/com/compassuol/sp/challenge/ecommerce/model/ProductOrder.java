@@ -1,19 +1,17 @@
 package br.com.compassuol.sp.challenge.ecommerce.model;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Entity;
 
 import java.math.BigDecimal;
-import java.util.Optional;
 
 
 public class ProductOrder {
 
-    @ManyToOne
     private Product product;
 
     private int productId;
     private int quantity;
 
-   public ProductOrder(Product product, int quatity){
+   public ProductOrder(Product product, int quantity){
     this.product = product;
     this.quantity = quantity;
    }
