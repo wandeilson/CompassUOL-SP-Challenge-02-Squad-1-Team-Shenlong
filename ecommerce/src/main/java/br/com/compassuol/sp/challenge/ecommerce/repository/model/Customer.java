@@ -8,6 +8,10 @@ import org.springframework.boot.autoconfigure.web.WebProperties;
 public class Customer {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+<<<<<<< HEAD:ecommerce/src/main/java/br/com/compassuol/sp/challenge/ecommerce/repository/model/Customer.java
+=======
+    @Column(name = "customer_id")
+>>>>>>> 938de745cf2fec09c1587dda5ef287b6e247297a:ecommerce/src/main/java/br/com/compassuol/sp/challenge/ecommerce/model/Customer.java
     private Long customerId;
 
     @NotNull(message = "Name is mandatory")

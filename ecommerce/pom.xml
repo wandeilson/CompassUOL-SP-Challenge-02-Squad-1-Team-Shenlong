@@ -15,12 +15,14 @@
 	<description>Demo project for Spring Boot</description>
 	<properties>
 		<java.version>17</java.version>
-	</properties>
+
+    </properties>
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
+
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-jpa</artifactId>
@@ -46,6 +48,7 @@
 			<scope>test</scope>
 		</dependency>
 
+<<<<<<< HEAD
 		<!--Junit Test-->
 		<dependency>
 			<groupId>org.junit.jupiter</groupId>
@@ -58,6 +61,11 @@
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
+=======
+
+
+    </dependencies>
+>>>>>>> 938de745cf2fec09c1587dda5ef287b6e247297a
 
 	<build>
 		<plugins>
@@ -65,7 +73,10 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
+
+
 		</plugins>
+
 	</build>
 
 </project>
