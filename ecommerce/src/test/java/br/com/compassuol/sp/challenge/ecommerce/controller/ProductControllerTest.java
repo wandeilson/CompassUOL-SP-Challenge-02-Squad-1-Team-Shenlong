@@ -56,12 +56,10 @@ public class ProductControllerTest {
         product2.setName("Dress");
         product2.setPrice(new BigDecimal("50.00"));
         product2.setDescription("Test");
-
-       // mockMvc = MockMvcBuilders.standaloneSetup(productController).build();
     }
 
     @Test
-    void testFindByIdTest(){
+    void findByIdTest(){
         //action
         productService.findById(product1.getProductId());
         //Verification
@@ -69,7 +67,7 @@ public class ProductControllerTest {
     }
 
     @Test
-    void testFindByIdNotFoundTest(){
+    void findByIdNotFoundTest(){
         //action
         productService.findById(product1.getProductId());
         //Verification
@@ -88,16 +86,18 @@ public class ProductControllerTest {
     }
     @Test
     public void updateTest(){
+        //action
         product1.setDescription("update teste unitário");
+        //Verification
         assertNotNull(productController.update(1L, product1));
         assertEquals("update teste unitário", product1.getDescription());
     }
     @Test
     public void deleteTest() {
+        //action
         ResponseEntity<?> response = productController.delete(1L);
         HttpStatus statusCode = (HttpStatus) response.getStatusCode();
-
+        //Verification
         assertEquals(HttpStatus.NO_CONTENT, statusCode);
     }
-
 }
