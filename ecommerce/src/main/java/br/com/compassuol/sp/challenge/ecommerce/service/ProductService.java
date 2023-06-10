@@ -1,5 +1,5 @@
 package br.com.compassuol.sp.challenge.ecommerce.service;
-import br.com.compassuol.sp.challenge.ecommerce.model.Product;
+import br.com.compassuol.sp.challenge.ecommerce.repository.model.Product;
 import br.com.compassuol.sp.challenge.ecommerce.repository.ProductRepository;
 import org.springframework.stereotype.Service;
 

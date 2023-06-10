@@ -1,4 +1,4 @@
-package br.com.compassuol.sp.challenge.ecommerce.model;
+package br.com.compassuol.sp.challenge.ecommerce.repository.model;
 
 import br.com.compassuol.sp.challenge.ecommerce.enums.PaymentMethod;
 import jakarta.persistence.*;
@@ -17,10 +17,11 @@ public class Payment {
     @Column (name = "payment_id")
     private Long paymentId;
 
-    @NotNull(message = "payment")
+    @NotNull
     @Column(name = "payment Method")
     private PaymentMethod paymentMethod;
     @Column
+    @NotNull
     @DateTimeFormat
     private LocalDate paymentDate;
 
@@ -28,7 +29,7 @@ public class Payment {
 
 
 
-    @Override
+
     public String toString() {
         return "Payment{" +
                 "PaymentId=" + paymentId +

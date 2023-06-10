@@ -1,4 +1,4 @@
-package br.com.compassuol.sp.challenge.ecommerce.model;
+package br.com.compassuol.sp.challenge.ecommerce.repository.model;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
