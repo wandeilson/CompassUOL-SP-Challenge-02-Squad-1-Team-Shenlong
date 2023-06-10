@@ -12,12 +12,15 @@ public class Product {
     private Long productId;
     @Size(min = 3)
     @NotBlank(message = "Name is mandatory")
+    @NotNull
     private String name;
     @NotNull(message = "Name is mandatory")
     private BigDecimal price;
     @Size(min = 3)
     @NotBlank(message = "Description is mandatory")
+    @NotNull
     private String description;
+
 
     public Long getProductId() {
         return productId;
