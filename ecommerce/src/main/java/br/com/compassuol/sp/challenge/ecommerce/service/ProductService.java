@@ -1,6 +1,6 @@
 package br.com.compassuol.sp.challenge.ecommerce.service;
-import br.com.compassuol.sp.challenge.ecommerce.exceptions.DatabaseException;
-import br.com.compassuol.sp.challenge.ecommerce.exceptions.ResourceNotFoundException;
+import br.com.compassuol.sp.challenge.ecommerce.exception.DatabaseException;
+import br.com.compassuol.sp.challenge.ecommerce.exception.ResourceNotFoundException;
 import br.com.compassuol.sp.challenge.ecommerce.model.Product;
 import br.com.compassuol.sp.challenge.ecommerce.repository.ProductRepository;
 import jakarta.persistence.EntityNotFoundException;
