@@ -9,10 +9,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
+import java.util.*;
 
 @Entity
 @Table(name = "orders")
@@ -25,7 +22,7 @@ public class Order {
     @JoinColumn(name = "customer_id")
     private Customer customerId;
 
-    //private ProductOrder productOrder;
+//    private Set<Product> productOrder;
 
 
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd",timezone = "GMT")
@@ -54,6 +51,13 @@ public class Order {
         //productOrderList = new ArrayList<>();
     }
 
+//    public Set<Product> getProductOrder() {
+//        return productOrder;
+//    }
+//
+//    public void setProductOrder(Set<Product> productOrder) {
+//        this.productOrder = productOrder;
+//    }
 //    public List<ProductOrder> getProductOrderList(){
 //        return productOrderList;
 //    }

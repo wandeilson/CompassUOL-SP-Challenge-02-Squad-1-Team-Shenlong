@@ -1,5 +1,5 @@
 package br.com.compassuol.sp.challenge.ecommerce.model;
-import jakarta.persistence.Entity;
+
 
 import java.math.BigDecimal;
 
@@ -11,7 +11,7 @@ public class ProductOrder {
     private int productId;
     private int quantity;
 
-   public ProductOrder(Product product, int quantity){
+    public ProductOrder(Product product, int quantity){
     this.product = product;
     this.quantity = quantity;
    }

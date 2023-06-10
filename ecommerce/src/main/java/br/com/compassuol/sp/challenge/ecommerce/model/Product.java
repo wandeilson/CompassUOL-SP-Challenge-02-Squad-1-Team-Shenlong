@@ -4,6 +4,7 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import java.math.BigDecimal;
+import java.util.Set;
 
 @Entity
 public class Product {
@@ -18,6 +19,8 @@ public class Product {
     @Size(min = 3)
     @NotBlank(message = "Description is mandatory")
     private String description;
+
+    //private Set<Order> productOrder;
 
     public Long getProductId() {
         return productId;
