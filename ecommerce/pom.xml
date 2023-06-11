@@ -48,7 +48,7 @@
 			<scope>test</scope>
 		</dependency>
 
-<<<<<<< HEAD
+<!--<<<<<<< HEAD -->
 		<!--Junit Test-->
 		<dependency>
 			<groupId>org.junit.jupiter</groupId>
@@ -61,22 +61,19 @@
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
-=======
+	<!--======= -->
+   <!-- >>>>>>> 938de745cf2fec09c1587dda5ef287b6e247297a -->
+
+        <build>
+            <plugins>
+                <plugin>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-maven-plugin</artifactId>
+                </plugin>
 
 
-    </dependencies>
->>>>>>> 938de745cf2fec09c1587dda5ef287b6e247297a
+            </plugins>
 
-	<build>
-		<plugins>
-			<plugin>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-maven-plugin</artifactId>
-			</plugin>
+        </build>
 
-
-		</plugins>
-
-	</build>
-
-</project>
+    </project>
