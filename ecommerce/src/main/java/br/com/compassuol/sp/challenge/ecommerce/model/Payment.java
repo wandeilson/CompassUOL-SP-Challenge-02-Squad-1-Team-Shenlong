@@ -1,44 +1,43 @@
-package br.com.compassuol.sp.challenge.ecommerce.repository.model;
+package br.com.compassuol.sp.challenge.ecommerce.model;
 
 import br.com.compassuol.sp.challenge.ecommerce.enums.PaymentMethod;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
-import java.util.Date;
+import java.util.List;
 
-@Entity
+@Entity(name = "Payment")
 public class Payment {
-    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-
-    @NotNull(message = "payment")
-    @Column (name = "payment_id")
+    @Id
+    @Column(name = "payment_Id")
     private Long paymentId;
 
     @NotNull
-    @Column(name = "payment Method")
+    @Column
     private PaymentMethod paymentMethod;
+
+    @NotNull
+
+    @JsonFormat(shape = JsonFormat.Shape.STRING,pattern = "yyyy-MM-dd",timezone = "GMT")
+    @DateTimeFormat
+    @Column(name = "payment-date")
+    private LocalDate paymentDate;
     @Column
     @NotNull
-    @DateTimeFormat
-    private LocalDate paymentDate;
+    @OneToOne
+    private List<Order> orderId;
 
-   // private Order orderId ;
-
-
-
-
-    public String toString() {
-        return "Payment{" +
-                "PaymentId=" + paymentId +
-                ", paymentMethod=" + paymentMethod +
-                ", paymentDate=" +paymentDate +
-                ", paymentDate='" + paymentDate + '\'' +
-                '}';
+    public void setOrderId(List<Order> orderId) {
+        this.orderId = orderId;
     }
 
+    public List<Order> getOrderId() {
+        return orderId;
+    }
 
     public void setProductId(Long paymentId) {
        this.paymentId = paymentId;

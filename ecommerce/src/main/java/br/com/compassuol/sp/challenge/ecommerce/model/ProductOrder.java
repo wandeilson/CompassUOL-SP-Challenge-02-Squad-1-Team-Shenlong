@@ -1,8 +1,11 @@
 package br.com.compassuol.sp.challenge.ecommerce.model;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
+import jakarta.validation.constraints.NotNull;
 
 import java.math.BigDecimal;
-import java.util.Optional;
 
 
 public class ProductOrder {
@@ -11,6 +14,7 @@ public class ProductOrder {
     private Product product;
 
     private int productId;
+
     private int quantity;
 
    public ProductOrder(Product product, int quatity){

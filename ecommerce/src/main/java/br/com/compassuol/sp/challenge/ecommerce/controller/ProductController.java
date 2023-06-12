@@ -1,6 +1,6 @@
 package br.com.compassuol.sp.challenge.ecommerce.controller;
 
-import br.com.compassuol.sp.challenge.ecommerce.repository.model.Product;
+import br.com.compassuol.sp.challenge.ecommerce.model.Product;
 import br.com.compassuol.sp.challenge.ecommerce.service.ProductService;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;

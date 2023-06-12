@@ -1,6 +1,6 @@
 package br.com.compassuol.sp.challenge.ecommerce.model;
 
-import br.com.compassuol.sp.challenge.ecommerce.model.enums.OrderStatus;
+import br.com.compassuol.sp.challenge.ecommerce.enums.OrderStatus;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
@@ -11,7 +11,6 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-import java.util.Optional;
 
 @Entity
 @Table(name = "orders")
