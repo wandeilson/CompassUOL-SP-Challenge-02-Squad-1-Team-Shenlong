@@ -31,5 +31,3 @@ build/
 
 ### VS Code ###
 .vscode/
-../.idea/modules.xml
-/src/main/resources/application.properties
