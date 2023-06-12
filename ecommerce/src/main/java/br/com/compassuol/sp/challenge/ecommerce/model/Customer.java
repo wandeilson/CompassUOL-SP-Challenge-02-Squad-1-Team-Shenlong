@@ -2,6 +2,7 @@ package br.com.compassuol.sp.challenge.ecommerce.model;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
+import org.hibernate.validator.constraints.br.CPF;
 import org.springframework.boot.autoconfigure.web.WebProperties;
 
 @Entity
@@ -19,6 +20,7 @@ public class Customer {
     @NotNull(message = "CPF is mandatory")
     @Size(min = 11, max = 11)
     @NotBlank
+    @CPF
     private String cpf;
 
     @NotNull(message = "Email is mandatory")
@@ -26,7 +28,8 @@ public class Customer {
     @NotBlank
     private String email;
 
-    private boolean active;
+    @NotNull
+    private Boolean active;
 
     public Customer() {
     }
@@ -63,11 +66,11 @@ public class Customer {
         this.email = email;
     }
 
-    public boolean isActive() {
+    public Boolean isActive() {
         return active;
     }
 
-    public void setActive(boolean active) {
+    public void setActive(Boolean active) {
         this.active = active;
     }
 

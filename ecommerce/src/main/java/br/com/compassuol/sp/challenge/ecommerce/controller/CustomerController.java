@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/api/customers")
 public class CustomerController {
-
     private CustomerService customerService;
     public CustomerController(CustomerService customerService) {
         this.customerService = customerService;
@@ -32,5 +31,4 @@ public class CustomerController {
     public ResponseEntity<Object> update(@RequestBody @Valid Customer customer, @PathVariable Long customerId) {
         return ResponseEntity.status(HttpStatus.OK).body(customerService.update(customer, customerId));
     }
-
 }
