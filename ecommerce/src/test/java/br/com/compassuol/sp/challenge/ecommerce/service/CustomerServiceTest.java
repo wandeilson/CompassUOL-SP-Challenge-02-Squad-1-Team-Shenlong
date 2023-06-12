@@ -71,8 +71,6 @@ class CustomerServiceTest {
             assertEquals(CustomerNotFoundException.class, ex.getClass());
             assertEquals("Id: " + id + " does not exist", ex.getMessage());
         }
-
-//        assertThat(customerService.findById(1L)).isEqualTo(null);
     }
 
     @Test
