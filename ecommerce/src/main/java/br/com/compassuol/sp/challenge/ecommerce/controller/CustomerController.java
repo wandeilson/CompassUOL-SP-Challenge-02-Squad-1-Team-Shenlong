@@ -20,11 +20,6 @@ public class CustomerController {
     @GetMapping("/{customerId}")
     public ResponseEntity<Object> findById(@PathVariable Long customerId) {
         Customer customer = customerService.findById(customerId);
-
-        if (customer == null) {
-            throw new CustomerNotFoundException("Id: " + customerId + " does not exist");
-        }
-
         return ResponseEntity.ok(customer);
     }
 
