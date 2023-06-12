@@ -3,12 +3,11 @@ package br.com.compassuol.sp.challenge.ecommerce.model;
 import br.com.compassuol.sp.challenge.ecommerce.enums.PaymentMethod;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
-import java.util.List;
+import java.util.Objects;
 
 @Entity(name = "Payment")
 public class Payment {
@@ -35,6 +34,18 @@ public class Payment {
    
     private Long idOrder;
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Payment payment = (Payment) o;
+        return Objects.equals(paymentId, payment.paymentId) && paymentMethod == payment.paymentMethod && Objects.equals(paymentDate, payment.paymentDate) && Objects.equals(orderId, payment.orderId) && Objects.equals(idOrder, payment.idOrder);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(paymentId, paymentMethod, paymentDate, orderId, idOrder);
+    }
 
     public void setPaymentId(Long paymentId) {
         this.paymentId = paymentId;
@@ -72,6 +83,7 @@ public class Payment {
     }
 
     public LocalDate getPaymentDate() {
+
         return paymentDate;
     }
 }
