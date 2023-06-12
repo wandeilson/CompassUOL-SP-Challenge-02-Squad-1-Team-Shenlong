@@ -1,30 +1,22 @@
 package br.com.compassuol.sp.challenge.ecommerce.model;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
+
+import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 
-import java.math.BigDecimal;
-
-
+@Entity
 public class ProductOrder {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "product_order_id")
+    private Long productOrderID;
 
-    @ManyToOne
+    @OneToOne
+    @JoinColumn(name = "product_id")
     private Product product;
-
-    private int productId;
-
+    @NotNull
+    private Long idProduct;
+    @NotNull
     private int quantity;
-
-   public ProductOrder(Product product, int quatity){
-    this.product = product;
-    this.quantity = quantity;
-   }
-
-    public BigDecimal getTotal(){
-        return product.getPrice().multiply(BigDecimal.valueOf(quantity));
-    }
 
     public Product getProduct() {
         return product;
@@ -32,6 +24,14 @@ public class ProductOrder {
 
     public void setProduct(Product product) {
         this.product = product;
+    }
+
+    public Long getIdProduct() {
+        return idProduct;
+    }
+
+    public void setIdProduct(Long idProduct) {
+        this.idProduct = idProduct;
     }
 
     public int getQuantity() {

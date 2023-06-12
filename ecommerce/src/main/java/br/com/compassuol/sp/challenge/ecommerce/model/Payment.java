@@ -3,6 +3,7 @@ package br.com.compassuol.sp.challenge.ecommerce.model;
 import br.com.compassuol.sp.challenge.ecommerce.enums.PaymentMethod;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -26,16 +27,28 @@ public class Payment {
     @DateTimeFormat
     @Column(name = "payment-date")
     private LocalDate paymentDate;
-    @Column
-    @NotNull
     @OneToOne
-    private List<Order> orderId;
+    @JoinColumn(name = "order_id")
+    private Order orderId;
 
-    public void setOrderId(List<Order> orderId) {
+    @NotNull
+   
+    private Long idOrder;
+
+
+    public void setPaymentId(Long paymentId) {
+        this.paymentId = paymentId;
+    }
+
+    public Long getIdOrder() {
+        return idOrder;
+    }
+
+    public void setOrderId(Order orderId) {
         this.orderId = orderId;
     }
 
-    public List<Order> getOrderId() {
+    public Order getOrderId() {
         return orderId;
     }
 

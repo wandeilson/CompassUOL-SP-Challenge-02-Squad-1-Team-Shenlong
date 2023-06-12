@@ -1,74 +1,50 @@
 package br.com.compassuol.sp.challenge.ecommerce.model;
 
-import br.com.compassuol.sp.challenge.ecommerce.enums.OrderStatus;
-
+import br.com.compassuol.sp.challenge.ecommerce.model.enums.Status;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import org.springframework.format.annotation.DateTimeFormat;
-
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 @Entity
-@Table(name = "orders")
+@Table(name = "_order")
 public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long orderId;
+    private Long orderID;
 
     @OneToOne
     @JoinColumn(name = "customer_id")
     private Customer customerId;
 
-    private ProductOrder productOrder;
+    @NotNull
+    private Status status;
 
+    @Transient
+    private List<ProductOrder> productsOrderList;
 
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd",timezone = "GMT")
-    @Column(name = "data_hora", nullable = false)
+    @Column(name = "date", nullable = false)
     @DateTimeFormat
-    private LocalDate dateHour;
-
-    @Enumerated(EnumType.STRING)
-    @Column(name = "order_status")
-    private OrderStatus orderStatus;
-
-
-    private List<ProductOrder> productOrderList;
-
+    @NotNull
+    private LocalDate date;
 
     public Order() {
-        productOrderList = new ArrayList<>();
+        this.productsOrderList = new ArrayList<>();
     }
 
-    public Order(Long orderId, Customer customerId, OrderStatus orderStatus) {
-        this.orderId = orderId;
-        this.customerId = customerId;
-        this.dateHour = LocalDate.now();
-        this.orderStatus = orderStatus;
-        productOrderList = new ArrayList<>();
+    public Long getOrderID() {
+        return orderID;
     }
 
-    public List<ProductOrder> getProductOrderList(){
-        return productOrderList;
+    public void setOrderID(Long orderID) {
+        this.orderID = orderID;
     }
-
-
-    public void addProduct(Product product , int quantity){
-        ProductOrder productOrder = new ProductOrder(product, quantity);
-        this.productOrderList.add(productOrder);
-    }
-
-    public long getOrderId() {
-        return orderId;
-    }
-
-    public void setOrderId(long orderId) {
-        this.orderId = orderId;
-    }
-
 
     public Customer getCustomerId() {
         return customerId;
@@ -78,32 +54,38 @@ public class Order {
         this.customerId = customerId;
     }
 
-    public LocalDate getDateHour() {
-        return dateHour;
+    public Status getStatus() {
+        return status;
     }
 
-    public void setDataHora(LocalDate dateHour) {
-        this.dateHour = dateHour;
+    public void setStatus(Status status) {
+        this.status = status;
     }
 
-    public OrderStatus getOrderStatus() {
-        return orderStatus;
+    public List<ProductOrder> getProductsOrderList() {
+        return productsOrderList;
     }
 
-    public void setOrderStatus(OrderStatus orderStatus) {
-        this.orderStatus = orderStatus;
+    public void setProductsOrderList(List<ProductOrder> productsOrderList) {
+        this.productsOrderList = productsOrderList;
+    }
+
+    public LocalDate getDate() {
+        return date;
+    }
+
+    public void setDate(LocalDate date) {
+        this.date = date;
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Order order = (Order) o;
-        return orderId == order.orderId;
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(orderId);
+    public String toString() {
+        return "Order{" +
+                "orderID=" + orderID +
+                ", customerId=" + customerId +
+                ", status=" + status +
+                ", productsOrderList=" + productsOrderList +
+                ", dateHour=" + date +
+                '}';
     }
 }

@@ -2,12 +2,12 @@ package br.com.compassuol.sp.challenge.ecommerce.model;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
+import org.springframework.boot.autoconfigure.web.WebProperties;
 
 @Entity
 public class Customer {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-
     @Column(name = "customer_id")
     private Long customerId;
 

@@ -1,9 +1,11 @@
 package br.com.compassuol.sp.challenge.ecommerce.service;
 
 import br.com.compassuol.sp.challenge.ecommerce.exception.ResourceNotFoundException;
+import br.com.compassuol.sp.challenge.ecommerce.model.Order;
 import br.com.compassuol.sp.challenge.ecommerce.model.Payment;
+import br.com.compassuol.sp.challenge.ecommerce.model.enums.Status;
+import br.com.compassuol.sp.challenge.ecommerce.repository.OrderRepository;
 import br.com.compassuol.sp.challenge.ecommerce.repository.PaymentRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -12,13 +14,22 @@ import java.util.Optional;
 @Service
 public class PaymentService {
 
+    private OrderRepository orderRepository;
     private PaymentRepository paymentRepository;
-    @Autowired
-    public PaymentService (PaymentRepository paymentRepository){
+
+    public PaymentService (PaymentRepository paymentRepository,OrderRepository orderRepository){
 
         this.paymentRepository = paymentRepository;
+        this.orderRepository = orderRepository;
     }
     public Payment create(Payment payment) {
+       Optional<Order> order = orderRepository.findById(payment.getIdOrder());
+        if (order.isEmpty())
+            System.out.println("execao");
+            Order orderPayment = order.get();
+            payment.setOrderId(orderPayment);
+            orderPayment.setStatus(Status.CONFIRMED);
+            orderRepository.save(orderPayment);
 
         return paymentRepository.save(payment);
     }
