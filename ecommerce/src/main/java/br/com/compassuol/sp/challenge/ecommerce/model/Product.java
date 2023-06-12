@@ -9,6 +9,7 @@ import java.math.BigDecimal;
 public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "product_id")
     private Long productId;
     @Size(min = 3)
     @NotBlank(message = "Name is mandatory")
