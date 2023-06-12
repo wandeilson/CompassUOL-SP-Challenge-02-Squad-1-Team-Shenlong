@@ -17,6 +17,8 @@ public class CustomerService {
 
     public Customer findById(Long id) {
         Optional<Customer> customer = customerRepository.findById(id);
+        if (customer.isEmpty())
+            throw new CustomerNotFoundException("Id: " + id + " does not exist");
         return customer.orElse(null);
     }
 
